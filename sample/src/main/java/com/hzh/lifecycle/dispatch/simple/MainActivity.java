@@ -18,8 +18,8 @@ public class MainActivity extends LifecycleActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ViewGroup rootLayout = findViewById(R.id.rootLayout);
-        Button btnAddView = findViewById(R.id.addViewActivity);
+        final ViewGroup rootLayout = findViewById(R.id.rootLayout);
+        final Button btnAddView = findViewById(R.id.addViewActivity);
         Button btnToggleFragment = findViewById(R.id.toggleFragment);
         final ActivityLayoutViewHolder holder = new ActivityLayoutViewHolder(this);
         btnAddView.setOnClickListener(new View.OnClickListener() {
@@ -28,8 +28,14 @@ public class MainActivity extends LifecycleActivity {
                 boolean isAdded = holder.isAddListened();
                 if (isAdded) {
                     holder.removeListener();
+                    btnAddView.setText("add view - MainActivity");
+                    rootLayout.removeView(holder.getLayout());
                 } else {
                     holder.addListener();
+                    btnAddView.setText("remove view - MainActivity");
+                    rootLayout.addView(holder.getLayout(), new RelativeLayout.LayoutParams
+                            (RelativeLayout.LayoutParams.WRAP_CONTENT
+                                    , RelativeLayout.LayoutParams.WRAP_CONTENT));
                 }
             }
         });
@@ -39,8 +45,6 @@ public class MainActivity extends LifecycleActivity {
                 toggleFragment();
             }
         });
-        rootLayout.addView(holder.getLayout(), new RelativeLayout.LayoutParams
-                (RelativeLayout.LayoutParams.WRAP_CONTENT, RelativeLayout.LayoutParams.WRAP_CONTENT));
         btnAddView.performClick();
         btnToggleFragment.performClick();
     }
