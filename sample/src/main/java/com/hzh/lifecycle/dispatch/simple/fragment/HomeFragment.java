@@ -17,7 +17,7 @@ import com.hzh.lifecycle.dispatch.simple.widget.FragmentLayoutViewHolder;
  * FileName: HomeFragment
  * Date: on 2017/11/8  下午7:43
  * Auther: zihe
- * Descirbe: TODO
+ * Descirbe: 演示用的Fragment
  * Email: hezihao@linghit.com
  */
 

@@ -11,7 +11,7 @@ import com.hzh.lifecycle.dispatch.lifecycle.ActivityLifecycle;
  * FileName: LifecycleActivity
  * Date: on 2017/11/9  上午11:48
  * Auther: zihe
- * Descirbe: TODO
+ * Descirbe: 需要提供生命周期监听的Activity，必须继承该类
  * Email: hezihao@linghit.com
  */
 

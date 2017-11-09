@@ -15,7 +15,7 @@ import com.hzh.lifecycle.dispatch.simple.fragment.HomeFragment;
  * FileName: LayoutViewHolder
  * Date: on 2017/11/8  下午10:23
  * Auther: zihe
- * Descirbe: TODO
+ * Descirbe: Fragment中持有View的类，动态创建View，并外部调用getLayout获取View
  * Email: hezihao@linghit.com
  */
 

@@ -15,7 +15,7 @@ import com.hzh.lifecycle.dispatch.simple.R;
  * FileName: ActivityLayoutViewHolder
  * Date: on 2017/11/9  上午11:09
  * Auther: zihe
- * Descirbe: TODO
+ * Descirbe: Activity中持有View的类，动态创建View，并外部调用getLayout获取View
  * Email: hezihao@linghit.com
  */
 
