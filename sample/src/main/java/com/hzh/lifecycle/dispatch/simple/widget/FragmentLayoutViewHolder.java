@@ -1,10 +1,10 @@
 package com.hzh.lifecycle.dispatch.simple.widget;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.apkfuns.logutils.LogUtils;
 import com.hzh.lifecycle.dispatch.listener.FragmentLifecycleListener;
 import com.hzh.lifecycle.dispatch.simple.MainActivity;
 import com.hzh.lifecycle.dispatch.simple.R;
@@ -20,7 +20,6 @@ import com.hzh.lifecycle.dispatch.simple.fragment.HomeFragment;
  */
 
 public class FragmentLayoutViewHolder {
-    private static final String TAG = FragmentLayoutViewHolder.class.getSimpleName();
     private Context context;
     private final FrameLayout layout;
 
@@ -38,29 +37,29 @@ public class FragmentLayoutViewHolder {
     private FragmentLifecycleListener lifecycleListener = new FragmentLifecycleListener() {
         @Override
         public void onAttach() {
-            Log.i(TAG, "-start-----------------fragment-----------------start-");
-            Log.i(TAG, "fragment lifecycle ::: onAttach");
+            LogUtils.d("-start-----------------fragment-----------------start-");
+            LogUtils.d("fragment lifecycle ::: onAttach");
         }
 
         @Override
         public void onStart() {
-            Log.i(TAG, "fragment lifecycle ::: onStart");
+            LogUtils.d("fragment lifecycle ::: onStart");
         }
 
         @Override
         public void onStop() {
-            Log.i(TAG, "fragment lifecycle ::: onStop");
+            LogUtils.d("fragment lifecycle ::: onStop");
         }
 
         @Override
         public void onDestroy() {
-            Log.i(TAG, "fragment lifecycle ::: onDestroy");
+            LogUtils.d("fragment lifecycle ::: onDestroy");
         }
 
         @Override
         public void onDetach() {
-            Log.i(TAG, "fragment lifecycle ::: onDetach");
-            Log.i(TAG, "-end-----------------fragment-----------------end-");
+            LogUtils.d("fragment lifecycle ::: onDetach");
+            LogUtils.d("-end-----------------fragment-----------------end-");
         }
     };
 

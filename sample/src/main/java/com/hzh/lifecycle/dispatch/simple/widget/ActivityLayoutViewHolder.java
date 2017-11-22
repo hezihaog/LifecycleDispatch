@@ -1,10 +1,10 @@
 package com.hzh.lifecycle.dispatch.simple.widget;
 
 import android.content.Context;
-import android.util.Log;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
+import com.apkfuns.logutils.LogUtils;
 import com.hzh.lifecycle.dispatch.lifecycle.ActivityLifecycle;
 import com.hzh.lifecycle.dispatch.listener.ActivityLifecycleListener;
 import com.hzh.lifecycle.dispatch.simple.MainActivity;
@@ -20,7 +20,6 @@ import com.hzh.lifecycle.dispatch.simple.R;
  */
 
 public class ActivityLayoutViewHolder {
-    private static final String TAG = ActivityLayoutViewHolder.class.getSimpleName();
     private Context context;
     private final FrameLayout layout;
 
@@ -39,34 +38,34 @@ public class ActivityLayoutViewHolder {
 
         @Override
         public void onCreate() {
-            Log.i(TAG, "-start-----------------activity-----------------start-");
-            Log.i(TAG, "activity lifecycle ::: onCreate");
+            LogUtils.d("-start-----------------activity-----------------start-");
+            LogUtils.d("activity lifecycle ::: onCreate");
         }
 
         @Override
         public void onStart() {
-            Log.i(TAG, "activity lifecycle ::: onStart");
+            LogUtils.d("activity lifecycle ::: onStart");
         }
 
         @Override
         public void onResume() {
-            Log.i(TAG, "activity lifecycle ::: onResume");
+            LogUtils.d("activity lifecycle ::: onResume");
         }
 
         @Override
         public void onPause() {
-            Log.i(TAG, "activity lifecycle ::: onPause");
+            LogUtils.d("activity lifecycle ::: onPause");
         }
 
         @Override
         public void onStop() {
-            Log.i(TAG, "activity lifecycle ::: onStop");
+            LogUtils.d("activity lifecycle ::: onStop");
         }
 
         @Override
         public void onDestroy() {
-            Log.i(TAG, "activity lifecycle ::: onDestroy");
-            Log.i(TAG, "-end-----------------activity-----------------end-");
+            LogUtils.d("activity lifecycle ::: onDestroy");
+            LogUtils.d("-end-----------------activity-----------------end-");
         }
     };
 
