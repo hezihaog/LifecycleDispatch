@@ -6,8 +6,8 @@ import android.widget.ImageView;
 
 import com.apkfuns.logutils.LogUtils;
 import com.hzh.lifecycle.dispatch.listener.FragmentLifecycleListener;
-import com.hzh.lifecycle.dispatch.simple.MainActivity;
 import com.hzh.lifecycle.dispatch.simple.R;
+import com.hzh.lifecycle.dispatch.simple.SecondActivity;
 import com.hzh.lifecycle.dispatch.simple.fragment.HomeFragment;
 
 /**
@@ -15,13 +15,13 @@ import com.hzh.lifecycle.dispatch.simple.fragment.HomeFragment;
  * FileName: LayoutViewHolder
  * Date: on 2017/11/8  下午10:23
  * Auther: zihe
- * Descirbe: Fragment中持有View的类，动态创建View，并外部调用getLayout获取View
+ * Descirbe: Fragment中持有View的类，动态创建View，并外部调用getRoot获取View
  * Email: hezihao@linghit.com
  */
 
 public class FragmentLayoutViewHolder {
     private Context context;
-    private final FrameLayout layout;
+    private FrameLayout layout;
 
     public FragmentLayoutViewHolder(Context context) {
         this.context = context;
@@ -32,54 +32,45 @@ public class FragmentLayoutViewHolder {
         FrameLayout.LayoutParams params = new FrameLayout
                 .LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
         layout.addView(imageView, params);
+        getFragment().getLifecycle().addListener(new FragmentLifecycleListener() {
+            @Override
+            public void onAttach() {
+                LogUtils.d("-start-----------------fragment-----------------start-");
+                LogUtils.d("fragment lifecycle ::: onAttach");
+            }
+
+            @Override
+            public void onStart() {
+                LogUtils.d("fragment lifecycle ::: onStart");
+            }
+
+            @Override
+            public void onStop() {
+                LogUtils.d("fragment lifecycle ::: onStop");
+            }
+
+            @Override
+            public void onDestroy() {
+                LogUtils.d("fragment lifecycle ::: onDestroy");
+            }
+
+            @Override
+            public void onDetach() {
+                LogUtils.d("fragment lifecycle ::: onDetach");
+                LogUtils.d("-end-----------------fragment-----------------end-");
+            }
+        });
     }
 
-    private FragmentLifecycleListener lifecycleListener = new FragmentLifecycleListener() {
-        @Override
-        public void onAttach() {
-            LogUtils.d("-start-----------------fragment-----------------start-");
-            LogUtils.d("fragment lifecycle ::: onAttach");
-        }
-
-        @Override
-        public void onStart() {
-            LogUtils.d("fragment lifecycle ::: onStart");
-        }
-
-        @Override
-        public void onStop() {
-            LogUtils.d("fragment lifecycle ::: onStop");
-        }
-
-        @Override
-        public void onDestroy() {
-            LogUtils.d("fragment lifecycle ::: onDestroy");
-        }
-
-        @Override
-        public void onDetach() {
-            LogUtils.d("fragment lifecycle ::: onDetach");
-            LogUtils.d("-end-----------------fragment-----------------end-");
-        }
-    };
-
-    public FrameLayout getLayout() {
+    public FrameLayout getRoot() {
         return layout;
     }
 
     private HomeFragment getFragment() {
-        if (context instanceof MainActivity) {
-            MainActivity activity = (MainActivity) context;
+        if (context instanceof SecondActivity) {
+            SecondActivity activity = (SecondActivity) context;
             return (HomeFragment) activity.getSupportFragmentManager().findFragmentByTag(HomeFragment.class.getSimpleName());
         }
         return null;
-    }
-
-    public void onAttachView() {
-        getFragment().getLifecycle().addListener(lifecycleListener);
-    }
-
-    public void onDetachView() {
-        getFragment().getLifecycle().removeListener(lifecycleListener);
     }
 }

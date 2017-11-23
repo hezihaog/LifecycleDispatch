@@ -45,16 +45,23 @@ public class ActivityLifecycle implements Lifecycle<ActivityLifecycleListener> {
 
     @Override
     public void removeListener(ActivityLifecycleListener listener) {
-        lifecycleListeners.remove(listener);
+        if (lifecycleListeners.size() > 0 && lifecycleListeners.contains(listener)) {
+            lifecycleListeners.remove(listener);
+        }
     }
 
     @Override
     public void removeAllListener() {
-        lifecycleListeners.clear();
+        if (lifecycleListeners.size() > 0) {
+            lifecycleListeners.clear();
+        }
     }
 
     @Override
     public boolean containListener(ActivityLifecycleListener listener) {
+        if (lifecycleListeners.size() <= 0) {
+            return false;
+        }
         return lifecycleListeners.contains(listener);
     }
 
