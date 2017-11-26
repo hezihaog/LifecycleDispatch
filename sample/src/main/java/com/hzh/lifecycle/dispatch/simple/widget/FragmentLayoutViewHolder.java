@@ -4,11 +4,11 @@ import android.content.Context;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.apkfuns.logutils.LogUtils;
 import com.hzh.lifecycle.dispatch.listener.FragmentLifecycleListener;
 import com.hzh.lifecycle.dispatch.simple.R;
 import com.hzh.lifecycle.dispatch.simple.SecondActivity;
 import com.hzh.lifecycle.dispatch.simple.fragment.HomeFragment;
+import com.hzh.logger.L;
 
 /**
  * Package: com.hzh.lifecycle.dispatch.simple.widget
@@ -35,29 +35,29 @@ public class FragmentLayoutViewHolder {
         getFragment().getLifecycle().addListener(new FragmentLifecycleListener() {
             @Override
             public void onAttach() {
-                LogUtils.d("-start-----------------fragment-----------------start-");
-                LogUtils.d("fragment lifecycle ::: onAttach");
+                L.d("-start-----------------fragment-----------------start-");
+                L.d("fragment lifecycle ::: onAttach");
             }
 
             @Override
             public void onStart() {
-                LogUtils.d("fragment lifecycle ::: onStart");
+                L.d("fragment lifecycle ::: onStart");
             }
 
             @Override
             public void onStop() {
-                LogUtils.d("fragment lifecycle ::: onStop");
+                L.d("fragment lifecycle ::: onStop");
             }
 
             @Override
             public void onDestroy() {
-                LogUtils.d("fragment lifecycle ::: onDestroy");
+                L.d("fragment lifecycle ::: onDestroy");
             }
 
             @Override
             public void onDetach() {
-                LogUtils.d("fragment lifecycle ::: onDetach");
-                LogUtils.d("-end-----------------fragment-----------------end-");
+                L.d("fragment lifecycle ::: onDetach");
+                L.d("-end-----------------fragment-----------------end-");
             }
         });
     }

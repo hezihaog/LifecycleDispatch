@@ -2,7 +2,8 @@ package com.hzh.lifecycle.dispatch.simple;
 
 import android.app.Application;
 
-import com.apkfuns.logutils.LogUtils;
+import com.hzh.logger.L;
+
 
 /**
  * Package: com.hzh.lifecycle.dispatch.simple
@@ -21,7 +22,7 @@ public class AppContext extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
-        LogUtils.getLogConfig().configAllowLog(debugEnable).configShowBorders(false);
+        L.configAllowLog(debugEnable);
     }
 
     public static AppContext getInstance() {

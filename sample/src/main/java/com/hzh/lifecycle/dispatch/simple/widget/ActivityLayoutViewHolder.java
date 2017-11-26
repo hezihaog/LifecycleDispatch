@@ -4,10 +4,11 @@ import android.content.Context;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 
-import com.apkfuns.logutils.LogUtils;
 import com.hzh.lifecycle.dispatch.listener.ActivityLifecycleListener;
 import com.hzh.lifecycle.dispatch.simple.MainActivity;
 import com.hzh.lifecycle.dispatch.simple.R;
+import com.hzh.logger.L;
+
 
 /**
  * Package: com.hzh.lifecycle.dispatch.simple.widget
@@ -36,34 +37,34 @@ public class ActivityLayoutViewHolder {
 
             @Override
             public void onCreate() {
-                LogUtils.d("-start-----------------activity-----------------start-");
-                LogUtils.d("activity lifecycle ::: onCreate");
+                L.d("-start-----------------activity-----------------start-");
+                L.d("activity lifecycle ::: onCreate");
             }
 
             @Override
             public void onStart() {
-                LogUtils.d("activity lifecycle ::: onStart");
+                L.d("activity lifecycle ::: onStart");
             }
 
             @Override
             public void onResume() {
-                LogUtils.d("activity lifecycle ::: onResume");
+                L.d("activity lifecycle ::: onResume");
             }
 
             @Override
             public void onPause() {
-                LogUtils.d("activity lifecycle ::: onPause");
+                L.d("activity lifecycle ::: onPause");
             }
 
             @Override
             public void onStop() {
-                LogUtils.d("activity lifecycle ::: onStop");
+                L.d("activity lifecycle ::: onStop");
             }
 
             @Override
             public void onDestroy() {
-                LogUtils.d("activity lifecycle ::: onDestroy");
-                LogUtils.d("-end-----------------activity-----------------end-");
+                L.d("activity lifecycle ::: onDestroy");
+                L.d("-end-----------------activity-----------------end-");
             }
         });
     }
