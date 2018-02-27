@@ -17,6 +17,16 @@ public interface FragmentLifecycleListener extends LifecycleListener {
     void onStart();
 
     /**
+     * Fragment onResume
+     */
+    void onResume();
+
+    /**
+     * Fragment onPause
+     */
+    void onPause();
+
+    /**
      * Fragment onStop对应方法
      */
     void onStop();

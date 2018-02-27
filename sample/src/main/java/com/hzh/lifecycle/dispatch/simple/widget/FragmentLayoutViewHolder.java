@@ -45,6 +45,16 @@ public class FragmentLayoutViewHolder {
             }
 
             @Override
+            public void onResume() {
+                L.d("fragment lifecycle ::: onResume");
+            }
+
+            @Override
+            public void onPause() {
+                L.d("fragment lifecycle ::: onPause");
+            }
+
+            @Override
             public void onStop() {
                 L.d("fragment lifecycle ::: onStop");
             }

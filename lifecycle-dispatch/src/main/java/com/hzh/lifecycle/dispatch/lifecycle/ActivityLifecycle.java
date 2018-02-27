@@ -20,6 +20,11 @@ public class ActivityLifecycle implements Lifecycle<ActivityLifecycleListener> {
     private boolean isStarted;
     private boolean isResumed;
 
+    /**
+     * 当完全具有焦点时设置为true，避免存在在onResume还没有执行完时，添加监听，造成onStop后续的生命周期被回调
+     */
+    private boolean isVisibleToUser = true;
+
     @Override
     public void addListener(ActivityLifecycleListener listener) {
         if (lifecycleListeners.contains(listener)) {
@@ -28,18 +33,23 @@ public class ActivityLifecycle implements Lifecycle<ActivityLifecycleListener> {
         lifecycleListeners.add(listener);
         if (isCreated) {
             listener.onCreate();
-        } else {
+        }
+        if (!isCreated) {
             listener.onDestroy();
         }
         if (isStarted) {
             listener.onStart();
-        } else {
-            listener.onStop();
         }
-        if (isResumed) {
-            listener.onResume();
-        } else {
-            listener.onPause();
+        if (!isVisibleToUser) {
+            if (!isStarted) {
+                listener.onStop();
+            }
+            if (isResumed) {
+                listener.onResume();
+            }
+            if (!isResumed) {
+                listener.onPause();
+            }
         }
     }
 
@@ -87,6 +97,7 @@ public class ActivityLifecycle implements Lifecycle<ActivityLifecycleListener> {
 
     public void onResume() {
         isResumed = true;
+        isVisibleToUser = true;
         for (ActivityLifecycleListener listener : lifecycleListeners) {
             listener.onResume();
         }
@@ -94,6 +105,7 @@ public class ActivityLifecycle implements Lifecycle<ActivityLifecycleListener> {
 
     public void onPause() {
         isResumed = false;
+        isVisibleToUser = false;
         for (ActivityLifecycleListener listener : lifecycleListeners) {
             listener.onPause();
         }

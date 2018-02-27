@@ -46,6 +46,22 @@ public class LifecycleFragment extends Fragment {
     }
 
     @Override
+    public void onResume() {
+        super.onResume();
+        if (lifecycle != null) {
+            lifecycle.onResume();
+        }
+    }
+
+    @Override
+    public void onPause() {
+        super.onPause();
+        if (lifecycle != null) {
+            lifecycle.onPause();
+        }
+    }
+
+    @Override
     public void onStop() {
         super.onStop();
         if (lifecycle != null) {

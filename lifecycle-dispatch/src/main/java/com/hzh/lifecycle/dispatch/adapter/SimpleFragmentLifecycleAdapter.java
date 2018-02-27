@@ -20,6 +20,16 @@ public class SimpleFragmentLifecycleAdapter implements FragmentLifecycleListener
     }
 
     @Override
+    public void onResume() {
+
+    }
+
+    @Override
+    public void onPause() {
+
+    }
+
+    @Override
     public void onStop() {
 
     }

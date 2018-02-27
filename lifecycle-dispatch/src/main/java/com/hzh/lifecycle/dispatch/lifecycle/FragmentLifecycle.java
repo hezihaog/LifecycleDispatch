@@ -13,11 +13,19 @@ import java.util.concurrent.CopyOnWriteArrayList;
  */
 
 public class FragmentLifecycle implements Lifecycle<FragmentLifecycleListener> {
-    //读写分离，避免遍历的同时add进集合，抛出高并发异常。
+    /**
+     * 读写分离，避免遍历的同时add进集合，抛出高并发异常。
+     */
     private final CopyOnWriteArrayList<FragmentLifecycleListener> lifecycleListeners = new CopyOnWriteArrayList<FragmentLifecycleListener>();
     private boolean isAttach;
     private boolean isStarted;
+    private boolean isResumed;
     private boolean isDestroyed;
+
+    /**
+     * 当完全具有焦点时设置为true，避免存在在onResume还没有执行完时，添加监听，造成onStop后续的生命周期被回调
+     */
+    private boolean isVisibleToUser = true;
 
     @Override
     public void addListener(FragmentLifecycleListener listener) {
@@ -28,17 +36,25 @@ public class FragmentLifecycle implements Lifecycle<FragmentLifecycleListener> {
         if (isAttach) {
             listener.onAttach();
         }
-        if (!isAttach) {
-            listener.onDetach();
-        }
         if (isStarted) {
             listener.onStart();
         }
-        if (!isStarted) {
-            listener.onStop();
+        if (isResumed) {
+            listener.onResume();
         }
-        if (isDestroyed) {
-            listener.onDestroy();
+        if (!isVisibleToUser) {
+            if (!isStarted) {
+                listener.onStop();
+            }
+            if (!isResumed) {
+                listener.onPause();
+            }
+            if (!isAttach) {
+                listener.onDetach();
+            }
+            if (isDestroyed) {
+                listener.onDestroy();
+            }
         }
     }
 
@@ -82,6 +98,22 @@ public class FragmentLifecycle implements Lifecycle<FragmentLifecycleListener> {
         isStarted = true;
         for (FragmentLifecycleListener listener : lifecycleListeners) {
             listener.onStart();
+        }
+    }
+
+    public void onResume() {
+        isResumed = true;
+        isVisibleToUser = true;
+        for (FragmentLifecycleListener listener : lifecycleListeners) {
+            listener.onResume();
+        }
+    }
+
+    public void onPause() {
+        isResumed = false;
+        isVisibleToUser = false;
+        for (FragmentLifecycleListener listener : lifecycleListeners) {
+            listener.onPause();
         }
     }
 

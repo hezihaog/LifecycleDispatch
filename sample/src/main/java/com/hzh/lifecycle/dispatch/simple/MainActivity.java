@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.RelativeLayout;
 
+import com.hzh.lifecycle.dispatch.DelegateFragmentFinder;
 import com.hzh.lifecycle.dispatch.base.LifecycleActivity;
 import com.hzh.lifecycle.dispatch.simple.widget.ActivityLayoutViewHolder;
 
@@ -26,5 +27,6 @@ public class MainActivity extends LifecycleActivity {
                 startActivity(new Intent(MainActivity.this, SecondActivity.class));
             }
         });
+        DelegateFragmentFinder.getInstance().startDelegate(this, TestDelegateFragment.class);
     }
 }
